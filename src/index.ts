@@ -35,6 +35,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         message_id: message.id,
         jointime: new Date(),
       });
+      return;
     }
 
     // LEFT
@@ -56,6 +57,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         .setColor("#dd2e44")
         .setDescription(`${clock} Spent **${spent}** from ${begin} to ${end}.`);
       message.edit("", embed);
+      return;
     }
 
     // if (newState.selfDeaf) {
