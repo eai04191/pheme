@@ -11,9 +11,10 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
   const guild = oldState.member?.guild || newState.member?.guild;
   if (!guild) return;
-  const guildChannel = guild.channels.cache.find((ch) => ch.name === "bot");
+  const guildChannel = guild.channels.cache.find(
+    (ch) => ch.name === "bot" && ch.type === "text"
+  );
   if (!guildChannel) return;
-  if (guildChannel.type !== "text") return;
   const channel = guildChannel as TextChannel;
 
   if (oldState.channelID === null) {
