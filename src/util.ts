@@ -14,7 +14,6 @@ export const getTextChannel = (guild: Discord.Guild) => {
 export const duration = (date: Date) => {
   const ms = new Date().getTime() - date.getTime();
   return prettyMilliseconds(ms, {
-    colonNotation: true,
     secondsDecimalDigits: 0,
   });
 };
