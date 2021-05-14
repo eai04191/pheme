@@ -1,6 +1,22 @@
 import Discord, { TextChannel } from "discord.js";
 import prettyMilliseconds from "pretty-ms";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(timezone);
+import { config } from "./config";
+
+if (config.timezone === undefined) {
+  const guess = dayjs.tz.guess();
+  dayjs.tz.setDefault(guess);
+  console.log(
+    `Since TZ was not set in env, the time zone was guessed to be ${guess} and was set.`
+  );
+} else {
+  dayjs.tz.setDefault(config.timezone);
+  console.log(`The time zone has been set to ${config.timezone}.`);
+}
 
 export const getTextChannel = (guild: Discord.Guild) => {
   const guildChannel = guild.channels.cache.find(
@@ -19,7 +35,7 @@ export const duration = (date: Date) => {
 };
 
 export const format = (date: Date) => {
-  return dayjs(date).format("HH:mm");
+  return dayjs(date).tz().format("HH:mm");
 };
 
 export const getRandomClock = () => {

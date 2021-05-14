@@ -3,4 +3,5 @@ dotenv.config();
 
 export const config = {
   token: process.env.DISCORD_TOKEN,
+  timezone: process.env.TZ,
 };
