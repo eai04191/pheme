@@ -39,31 +39,8 @@ export const format = (date: Date) => {
 };
 
 export const getRandomClock = () => {
-  const clocks = [
-    ":clock1:",
-    ":clock130:",
-    ":clock2:",
-    ":clock230:",
-    ":clock3:",
-    ":clock330:",
-    ":clock4:",
-    ":clock430:",
-    ":clock5:",
-    ":clock530:",
-    ":clock6:",
-    ":clock630:",
-    ":clock7:",
-    ":clock730:",
-    ":clock8:",
-    ":clock830:",
-    ":clock9:",
-    ":clock930:",
-    ":clock10:",
-    ":clock1030:",
-    ":clock11:",
-    ":clock1130:",
-    ":clock12:",
-    ":clock1230:",
-  ];
-  return clocks[Math.floor(Math.random() * clocks.length)];
+  const r = Math.random();
+  const time = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12][Math.floor(r * 12)];
+  const half = ["", "30"][Math.floor(r * 2)];
+  return `:clock${time}${half}:`;
 };
