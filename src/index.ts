@@ -50,6 +50,11 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
       const clock = getRandomClock();
       const spent = duration(log.jointime);
+      // If the time spent is less than VC_SRESHOLD, remove the message
+      if (!spent) {
+        message.delete();
+        return;
+      }
       const begin = format(log.jointime);
       const end = format(new Date());
       const embed = new Discord.MessageEmbed()
