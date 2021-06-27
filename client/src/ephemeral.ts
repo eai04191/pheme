@@ -1,17 +1,11 @@
 import AsyncNedb from "nedb-async";
 
-interface ILog {
-  id: string;
-  message_id: string;
-  jointime: Date | null;
-}
+const db = new AsyncNedb<Log>();
 
-const db = new AsyncNedb<ILog>();
-
-export const put = async (log: ILog) => {
+export const put = async (log: Log) => {
   await db.asyncUpdate({ id: log.id }, log, { upsert: true });
 };
 
-export const get = async (id: string): Promise<ILog | null> => {
+export const get = async (id: string): Promise<Log | null> => {
   return await db.asyncFindOne({ id: id });
 };

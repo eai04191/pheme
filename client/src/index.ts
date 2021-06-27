@@ -2,6 +2,7 @@ import { config } from "./config";
 import Discord from "discord.js";
 import { getTextChannel, duration, format, getRandomClock } from "./util";
 import { put, get } from "./ephemeral";
+import { saveLog } from "./api";
 
 const client = new Discord.Client();
 
@@ -33,7 +34,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
       await put({
         id: newState.member.id,
         message_id: message.id,
-        jointime: new Date(),
+        joinDate: new Date(),
       });
       return;
     }
@@ -41,27 +42,35 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     // LEFT
     if (newState.channelID === null) {
       const log = await get(newState.member.id);
-      if (log === null || log.jointime === null) return;
+      if (log === null || log.joinDate === null) return;
+
+      const { message_id, joinDate } = log;
+      const leaveDate = new Date();
 
       const message = channel.messages.cache.find(
-        (message) => message.id === log.message_id
+        (message) => message.id === message_id
       );
       if (message === undefined) return;
 
       const clock = getRandomClock();
-      const spent = duration(log.jointime);
+      const spent = duration(joinDate);
       // If the time spent is less than VC_SRESHOLD, remove the message
       if (!spent) {
         message.delete();
         return;
       }
-      const begin = format(log.jointime);
-      const end = format(new Date());
+      const join = format(joinDate);
+      const leave = format(leaveDate);
+
       const embed = new Discord.MessageEmbed()
         .setAuthor(`${author.name} left the channel!`, author.icon)
         .setColor("#dd2e44")
-        .setDescription(`${clock} Spent **${spent}** from ${begin} to ${end}.`);
+        .setDescription(
+          `${clock} Spent **${spent}** from ${join} to ${leave}.`
+        );
       message.edit("", embed);
+
+      saveLog({ ...log, leaveDate });
       return;
     }
 
