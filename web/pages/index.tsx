@@ -1,16 +1,9 @@
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { useEffect } from "react";
+import { signIn, signOut, useSession } from "next-auth/client";
 
 export default function Page() {
-  const [ session, loading ] = useSession()
+  const [session, loading] = useSession();
 
-  return <>
-    {!session && <>
-      Not signed in <br/>
-      <button onClick={() => signIn()}>Sign in</button>
-    </>}
-    {session && <>
-      Signed in as {session.user.email} <br/>
-      <button onClick={() => signOut()}>Sign out</button>
-    </>}
-  </>
+  if (session) return <div>hello</div>;
+  return <button onClick={() => signIn("discord")}>Sign out</button>;
 }
