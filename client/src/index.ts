@@ -52,21 +52,19 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
       );
       if (message === undefined) return;
 
-      const clock = getRandomClock();
       const spent = duration(joinDate);
       // If the time spent is less than VC_SRESHOLD, remove the message
       if (!spent) {
         message.delete();
         return;
       }
-      const join = format(joinDate);
-      const leave = format(leaveDate);
 
       const embed = new Discord.MessageEmbed()
         .setAuthor(`${author.name} left the channel!`, author.icon)
         .setColor("#dd2e44")
         .setDescription(
-          `${clock} Spent **${spent}** from ${join} to ${leave}.`
+          // prettier-ignore
+          `${getRandomClock()} Spent **${spent}** from ${format(joinDate)} to ${format(leaveDate)}.`
         );
       message.edit("", embed);
 
