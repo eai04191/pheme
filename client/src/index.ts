@@ -16,7 +16,6 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
   const author = {
     name: newState.member.nickname || newState.member?.displayName,
     icon: newState.member.user.displayAvatarURL(),
-    link: `https://discordapp.com/users/${newState.member.id}`,
   };
 
   try {
