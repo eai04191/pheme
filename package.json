@@ -3,5 +3,8 @@
     "workspaces": [
         "client",
         "api"
-    ]
+    ],
+    "dependencies": {
+        "prettier": "^2.3.1"
+    }
 }
