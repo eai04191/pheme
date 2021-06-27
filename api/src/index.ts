@@ -27,13 +27,7 @@ const getProperSheet = (leaveDate: Log["leaveDate"] = new Date()) => {
  */
 export const insertNewLog = (log: Log) => {
   const sheet = getProperSheet(log.leaveDate);
-  const lastRow = sheet.getDataRange().getValues().length;
-  // 空行を挿入
-  sheet.insertRowAfter(lastRow);
-  // データを挿入
-  sheet
-    .getRange(lastRow + 1, 1, 1, 4)
-    .setValues([[log.id, log.totalTimeSpent, log.joinDate, log.leaveDate]]);
+  sheet.appendRow([log.id, log.totalTimeSpent, log.joinDate, log.leaveDate])
 };
 
 /**
