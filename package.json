@@ -1,10 +1,11 @@
 {
-    "private": true,
-    "workspaces": [
-        "client",
-        "api"
-    ],
-    "dependencies": {
-        "prettier": "^2.3.1"
-    }
+  "private": true,
+  "workspaces": [
+    "client",
+    "api",
+    "web"
+  ],
+  "dependencies": {
+    "prettier": "^2.3.1"
+  }
 }
