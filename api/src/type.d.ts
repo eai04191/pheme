@@ -1,6 +1,6 @@
 declare type Log = {
   id: string;
-  totalTimeSpent: number;
+  timeSpent: number;
   joinDate: Date;
   leaveDate: Date;
 };

@@ -9,7 +9,7 @@ import {
 const insertNewLogTest = () => {
   insertNewLog({
     id: "1234",
-    totalTimeSpent: 100,
+    timeSpent: 100,
     joinDate: new Date(),
     leaveDate: new Date(),
   });

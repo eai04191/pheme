@@ -14,7 +14,7 @@ export const doPost = (e: GoogleAppsScript.Events.DoPost) => {
 
   const log = {
     id: obj.id,
-    timespent: obj.timespent,
+    timeSpent: obj.timeSpent,
     joinDate: new Date(obj.joinDate),
     leaveDate: new Date(obj.leaveDate),
   };
@@ -26,10 +26,10 @@ export const doPost = (e: GoogleAppsScript.Events.DoPost) => {
  * type guard
  */
 const isLog = (arg: any): arg is Log => {
-  const { id, timespent, joinDate, leaveDate } = arg;
+  const { id, timeSpent, joinDate, leaveDate } = arg;
   if (
     typeof id === "string" &&
-    typeof timespent === "string" &&
+    typeof timeSpent === "number" &&
     joinDate instanceof Date &&
     leaveDate instanceof Date
   ) {
