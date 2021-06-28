@@ -1,7 +1,11 @@
-import { insertNewLog, fetchEveryoneStats } from "./";
+import { insertNewLog, fetchEveryoneStats, getProperSheet } from "./";
 
 export const doGet = (e: GoogleAppsScript.Events.DoGet) => {
-  const payload = JSON.stringify(fetchEveryoneStats());
+  const data = {
+    stats: fetchEveryoneStats(),
+    sheetName: getProperSheet().getSheetName(),
+  };
+  const payload = JSON.stringify(data);
   const content = ContentService.createTextOutput();
   content.setMimeType(ContentService.MimeType.JSON);
   content.setContent(payload);

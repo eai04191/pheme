@@ -2,7 +2,7 @@
  * Dateを受け取ってDateが含まれる週のシートがあれば返す
  * なければ作成して返す
  */
-const getProperSheet = (leaveDate: Log["leaveDate"] = new Date()) => {
+export const getProperSheet = (leaveDate: Log["leaveDate"] = new Date()) => {
   const sunday = dayjs.dayjs(leaveDate).day(0).format("YYYY-MM-DD");
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = spreadsheet.getSheetByName(sunday);
