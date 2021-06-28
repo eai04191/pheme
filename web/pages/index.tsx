@@ -4,6 +4,7 @@ import { useSession } from "next-auth/client";
 import { useDiscordProfile, usePhemeStats } from "../hooks/swr";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import prettyMilliseconds from "pretty-ms";
 
 export default function Page() {
   const [session, loading] = useSession();
@@ -37,7 +38,7 @@ const App: React.VFC = () => {
   ));
 
   return (
-    <div className="max-w-5xl mx-auto py-8">
+    <div className="max-w-5xl mx-auto py-8 px-4">
       <h2 className="font-extrabold text-4xl">
         {data.sheetName.replaceAll("-", "/")}~
       </h2>
@@ -54,6 +55,17 @@ const UserStat: React.VFC<{ stat: Stat }> = ({ stat }) => {
   }
   if (!data) return null;
 
+  const duration = prettyMilliseconds(stat.totalTimeSpent, {
+    secondsDecimalDigits: 0,
+  })
+    .replace("ms", "ミリ秒")
+    .replace("s", "秒")
+    .replace("m", "分")
+    .replace("h", "時間")
+    .replace("d", "日")
+    .replace("y", "年");
+  const prettyMS = stat.totalTimeSpent.toLocaleString();
+
   return (
     <div className="flex items-center gap-4 shadow rounded-2xl p-6 justify-between">
       <div className="flex items-center gap-4">
@@ -66,7 +78,9 @@ const UserStat: React.VFC<{ stat: Stat }> = ({ stat }) => {
         />
         <span className="font-medium">{data.username}</span>
       </div>
-      <span className="font-bold text-2xl">{stat.totalTimeSpent}ms</span>
+      <span className="font-bold text-2xl" title={`${prettyMS}ms`}>
+        {duration}
+      </span>
     </div>
   );
 };
