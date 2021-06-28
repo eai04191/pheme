@@ -18,13 +18,7 @@ export default function Page() {
       <div className="h-screen flex flex-col justify-between text-gray-700">
         <Header />
         <main className="mb-auto">
-          {session ? (
-            <App />
-          ) : (
-            <div className="max-w-5xl mx-auto py-8 px-4 text-center font-bold text-xl">
-              Sign inしてください
-            </div>
-          )}
+          {session ? <App /> : <Message>Sign inしてください</Message>}
         </main>
         <Footer />
       </div>
@@ -32,14 +26,22 @@ export default function Page() {
   );
 }
 
+const Message: React.VFC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <div className="max-w-5xl mx-auto py-8 px-4 text-center font-bold text-xl">
+      {children}
+    </div>
+  );
+};
+
 const App: React.VFC = () => {
   const { data, error } = usePhemeStats();
 
   if (!data) {
     return (
-      <div className="max-w-5xl mx-auto py-8 px-4 text-center font-bold text-xl">
+      <Message>
         Loading...
-      </div>
+      </Message>
     );
   }
 
