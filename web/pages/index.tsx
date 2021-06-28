@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import { useSession } from "next-auth/client";
 import { useDiscordProfile, usePhemeStats } from "../hooks/swr";
@@ -7,13 +8,20 @@ import { Footer } from "../components/Footer";
 export default function Page() {
   const [session, loading] = useSession();
   return (
-    <div className="h-screen flex flex-col justify-between">
-      <Header />
-      <main className="mb-auto">
-        {session ? <App /> : <p>signinしてください</p>}
-      </main>
-      <Footer />
-    </div>
+    <>
+      <Head>
+        <title>Pheme</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+
+      <div className="h-screen flex flex-col justify-between">
+        <Header />
+        <main className="mb-auto">
+          {session ? <App /> : <p>signinしてください</p>}
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
 
@@ -30,7 +38,9 @@ const App: React.VFC = () => {
 
   return (
     <div className="max-w-5xl mx-auto py-8">
-      <h2 className="font-extrabold text-4xl">{data.sheetName.replaceAll("-","/")}~</h2>
+      <h2 className="font-extrabold text-4xl">
+        {data.sheetName.replaceAll("-", "/")}~
+      </h2>
       <div className="p-2" />
       {list}
     </div>
