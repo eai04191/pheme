@@ -50,7 +50,7 @@ const App: React.VFC = () => {
   const list = data.stats
     .sort((a, b) => b.totalTimeSpent - a.totalTimeSpent)
     .map((stat, index) => (
-      <div key={index}>
+      <div key={index} className="relative">
         <UserStat stat={stat} />
       </div>
     ));
@@ -63,7 +63,7 @@ const App: React.VFC = () => {
       <div className="p-1" />
       <h2 className="font-bold text-2xl">今週のボイスチャンネル参加時間</h2>
       <div className="p-3" />
-      {list}
+      <div className="grid gap-2">{list}</div>
     </div>
   );
 };
@@ -87,8 +87,8 @@ const UserStat: React.VFC<{ stat: Stat }> = ({ stat }) => {
   const prettyMS = stat.totalTimeSpent.toLocaleString();
 
   return (
-    <div className="flex items-center gap-4 shadow rounded-2xl p-6 justify-between">
-      <div className="flex items-center gap-4">
+    <div className="flex items-center shadow rounded-2xl p-6 justify-between hover:shadow-lg transition hover:-translate-x-2 transform-gpu">
+      <div className="flex items-center space-x-4">
         <Image
           className="rounded-full"
           src={`https://cdn.discordapp.com/avatars/${stat.id}/${data.avatar}.png`}
