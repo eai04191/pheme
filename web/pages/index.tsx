@@ -18,7 +18,13 @@ export default function Page() {
       <div className="h-screen flex flex-col justify-between">
         <Header />
         <main className="mb-auto">
-          {session ? <App /> : <p>signinしてください</p>}
+          {session ? (
+            <App />
+          ) : (
+            <div className="max-w-5xl mx-auto py-8 px-4 text-center font-bold text-xl">
+              Sign inしてください
+            </div>
+          )}
         </main>
         <Footer />
       </div>
@@ -29,7 +35,13 @@ export default function Page() {
 const App: React.VFC = () => {
   const { data, error } = usePhemeStats();
 
-  if (!data) return <div>Loading...</div>;
+  if (!data) {
+    return (
+      <div className="max-w-5xl mx-auto py-8 px-4 text-center font-bold text-xl">
+        Loading...
+      </div>
+    );
+  }
 
   const list = data.stats
     .sort((a, b) => b.totalTimeSpent - a.totalTimeSpent)
