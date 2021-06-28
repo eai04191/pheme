@@ -30,7 +30,7 @@ const Button: React.VFC<{ children: React.ReactNode; onClick: () => void }> = ({
 };
 
 const SignIn: React.VFC = () => {
-  return <Button onClick={() => signIn("discord")}>Sign in</Button>;
+  return <Button onClick={() => signIn("discord")}>Sign in with Discord</Button>;
 };
 
 const SignOut: React.VFC = () => {
