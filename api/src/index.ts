@@ -24,7 +24,7 @@ export const getProperSheet = (leaveDate: Log["leaveDate"] = new Date()) => {
  */
 export const insertNewLog = (log: Log) => {
   const sheet = getProperSheet(log.leaveDate);
-  sheet.appendRow([log.id, log.timeSpent, log.joinDate, log.leaveDate])
+  sheet.appendRow([log.id, log.timeSpent, log.joinDate, log.leaveDate]);
 };
 
 /**

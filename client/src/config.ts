@@ -7,5 +7,5 @@ export const config = {
   threshold_for_time_spent: Number(
     process.env.THRESHOLD_FOR_TIME_SPENT || 180000
   ),
-  endpoint:process.env.API_ENDPOINT
+  endpoint: process.env.API_ENDPOINT,
 };
