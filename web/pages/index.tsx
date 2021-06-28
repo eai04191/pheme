@@ -31,11 +31,13 @@ const App: React.VFC = () => {
 
   if (!data) return <div>Loading...</div>;
 
-  const list = data.stats.map((stat, index) => (
-    <div key={index}>
-      <UserStat stat={stat} />
-    </div>
-  ));
+  const list = data.stats
+    .sort((a, b) => b.totalTimeSpent - a.totalTimeSpent)
+    .map((stat, index) => (
+      <div key={index}>
+        <UserStat stat={stat} />
+      </div>
+    ));
 
   return (
     <div className="max-w-5xl mx-auto py-8 px-4">
