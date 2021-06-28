@@ -18,7 +18,13 @@ export default function Page() {
       <div className="h-screen flex flex-col justify-between text-gray-700">
         <Header />
         <main className="mb-auto">
-          {session ? <App /> : <Message>Sign inしてください</Message>}
+          {loading ? (
+            <Message>Loading...</Message>
+          ) : session ? (
+            <App />
+          ) : (
+            <Message>Sign inしてください</Message>
+          )}
         </main>
         <Footer />
       </div>
@@ -38,11 +44,7 @@ const App: React.VFC = () => {
   const { data, error } = usePhemeStats();
 
   if (!data) {
-    return (
-      <Message>
-        Loading...
-      </Message>
-    );
+    return <Message>Loading...</Message>;
   }
 
   const list = data.stats
