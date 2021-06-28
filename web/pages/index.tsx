@@ -15,7 +15,7 @@ export default function Page() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <div className="h-screen flex flex-col justify-between">
+      <div className="h-screen flex flex-col justify-between text-gray-700">
         <Header />
         <main className="mb-auto">
           {session ? (
@@ -52,11 +52,13 @@ const App: React.VFC = () => {
     ));
 
   return (
-    <div className="max-w-5xl mx-auto py-8 px-4">
-      <h2 className="font-extrabold text-4xl">
-        {data.sheetName.replaceAll("-", "/")}~
-      </h2>
-      <div className="p-2" />
+    <div className="max-w-5xl mx-auto py-10 px-4">
+      <p className="font-extrabold text-4xl">
+        {data.sheetName.replaceAll("-", "/")}
+      </p>
+      <div className="p-1" />
+      <h2 className="font-bold text-2xl">今週のボイスチャンネル参加時間</h2>
+      <div className="p-3" />
       {list}
     </div>
   );

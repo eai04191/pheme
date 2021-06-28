@@ -8,7 +8,7 @@ export const Header: React.VFC = () => {
   return (
     <div className="relative bg-white shadow flex-grow-0 ">
       <nav className="flex items-center  max-w-7xl mx-auto justify-between py-7 px-4">
-        <div className="text-3xl font-black text-gray-700 tracking-wide">Pheme</div>
+        <div className="text-3xl font-black tracking-wide">Pheme</div>
         <div>{button}</div>
       </nav>
     </div>
