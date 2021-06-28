@@ -1,3 +1,8 @@
+type Stats = {
+  stats: Stat[];
+  sheetName: string;
+};
+
 type Stat = {
   id: string;
   totalTimeSpent: number;

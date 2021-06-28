@@ -18,7 +18,7 @@ const App: React.VFC = () => {
   const { data, error } = usePhemeStats();
 
   const list = data ? (
-    data.map((stat, index) => (
+    data.stats.map((stat, index) => (
       <div key={index}>
         <UserStat stat={stat} />
       </div>
