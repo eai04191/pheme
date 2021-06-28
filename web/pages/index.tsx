@@ -1,36 +1,37 @@
 import Image from "next/image";
-import { Session } from "next-auth";
-import { signOut, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import { useDiscordProfile, usePhemeStats } from "../hooks/swr";
-import { SignIn } from "../components/SignIn";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 export default function Page() {
   const [session, loading] = useSession();
-
-  if (!session) {
-    return <SignIn />;
-  }
-
-  return <App />;
+  return (
+    <div className="h-screen flex flex-col justify-between">
+      <Header />
+      <main className="mb-auto">
+        {session ? <App /> : <p>signinしてください</p>}
+      </main>
+      <Footer />
+    </div>
+  );
 }
 
 const App: React.VFC = () => {
   const { data, error } = usePhemeStats();
 
-  const list = data ? (
-    data.stats.map((stat, index) => (
-      <div key={index}>
-        <UserStat stat={stat} />
-      </div>
-    ))
-  ) : (
-    <div>Loading...</div>
-  );
+  if (!data) return <div>Loading...</div>;
+
+  const list = data.stats.map((stat, index) => (
+    <div key={index}>
+      <UserStat stat={stat} />
+    </div>
+  ));
 
   return (
-    <div>
-      <h1>Pheme</h1>
-      <button onClick={() => signOut()}>Sign out</button>
+    <div className="max-w-5xl mx-auto py-8">
+      <h2 className="font-extrabold text-4xl">{data.sheetName.replaceAll("-","/")}~</h2>
+      <div className="p-2" />
       {list}
     </div>
   );
@@ -43,17 +44,19 @@ const UserStat: React.VFC<{ stat: Stat }> = ({ stat }) => {
   }
   if (!data) return null;
 
-  const avatar = `https://cdn.discordapp.com/avatars/${stat.id}/${data.avatar}.png`;
-
   return (
-    <div>
-      <Image
-        src={avatar}
-        alt={`${data.username}'s avatar`}
-        width={32}
-        height={32}
-      />
-      <span>{data.username}</span>:<span>{stat.totalTimeSpent}ms</span>
+    <div className="flex items-center gap-4 shadow rounded-2xl p-6 justify-between">
+      <div className="flex items-center gap-4">
+        <Image
+          className="rounded-full"
+          src={`https://cdn.discordapp.com/avatars/${stat.id}/${data.avatar}.png`}
+          alt={`${data.username}'s avatar`}
+          width={32}
+          height={32}
+        />
+        <span className="font-medium">{data.username}</span>
+      </div>
+      <span className="font-bold text-2xl">{stat.totalTimeSpent}ms</span>
     </div>
   );
 };
