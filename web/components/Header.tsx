@@ -9,7 +9,7 @@ export const Header: React.VFC = () => {
     <div className="relative bg-white shadow flex-grow-0 ">
       <nav className="flex items-center  max-w-7xl mx-auto justify-between py-7 px-4">
         <div className="text-3xl font-black tracking-wide">Pheme</div>
-        <div>{button}</div>
+        {!loading && <div>{button}</div>}
       </nav>
     </div>
   );
@@ -30,7 +30,9 @@ const Button: React.VFC<{ children: React.ReactNode; onClick: () => void }> = ({
 };
 
 const SignIn: React.VFC = () => {
-  return <Button onClick={() => signIn("discord")}>Sign in with Discord</Button>;
+  return (
+    <Button onClick={() => signIn("discord")}>Sign in with Discord</Button>
+  );
 };
 
 const SignOut: React.VFC = () => {
