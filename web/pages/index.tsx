@@ -4,6 +4,7 @@ import { useSession } from "next-auth/client";
 import { useDiscordProfile, usePhemeStats } from "../hooks/swr";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { Icon } from "../components/Icon";
 import prettyMilliseconds from "pretty-ms";
 
 export default function Page() {
@@ -89,13 +90,7 @@ const UserStat: React.VFC<{ stat: Stat }> = ({ stat }) => {
   return (
     <div className="flex items-center shadow rounded-2xl p-6 justify-between hover:shadow-lg transition hover:-translate-x-2 transform-gpu">
       <div className="flex items-center space-x-4">
-        <Image
-          className="rounded-full"
-          src={`https://cdn.discordapp.com/avatars/${stat.id}/${data.avatar}.png`}
-          alt={`${data.username}'s avatar`}
-          width={32}
-          height={32}
-        />
+        <Icon user={data} />
         <span className="font-medium">{data.username}</span>
       </div>
       <span className="font-bold text-2xl" title={`${prettyMS}ms`}>
